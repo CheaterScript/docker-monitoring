@@ -1,0 +1,15 @@
+global:
+  scrape_interval:     15s	# 采集数据的时间间隔,默认15s
+  evaluation_interval: 15s	# 评估规则的间隔时间,默认15s
+alerting:					# alertmanagers用于告警
+  alertmanagers:
+  - static_configs:
+    - targets:
+      # - alertmanager:9093
+rule_files:					# 规则配置文件
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+scrape_configs:				# 抓取哪里的数据到TSDB(时序数据库)
+  - job_name: prometheus
+    static_configs:
+    - targets: ['localhost:9090']

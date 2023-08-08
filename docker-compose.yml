@@ -1,0 +1,47 @@
+version: "3.8"
+services:
+  prometheus:
+    build:
+      context: prometheus/
+      args:
+        PROMETHEUS_VERSION: ${PROMETHEUS_VERSION}
+    user: root
+    container_name: prometheus
+    hostname: prometheus
+    restart: always
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring
+    volumes:
+      - ./prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus:/prometheus/data
+    command:
+      # - "--web.enable-lifecycle"
+      # - "--web.read-timeout=5m"
+      # - "--storage.tsdb.retention=30d"
+      # - "--web.max-connections=512"
+      # - "--query.timeout=2m"
+      # - "--query.max-concurrency=20"
+      # - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+      # - "--web.console.templates=/usr/share/prometheus/consoles"
+      # - '--storage.tsdb.retention.time=7d'
+      - "--config.file=/etc/prometheus/prometheus.yml"
+
+  grafana:
+    build:
+      context: grafana/
+      args:
+        GRAFANA_VERSION: ${GRAFANA_VERSION}
+    environment:
+      GF_INSTALL_PLUGINS: "grafana-clock-panel,grafana-simple-json-datasource"
+    ports:
+      - "3001:3000"
+    user: "104"
+
+networks:
+  monitoring:
+    driver: bridge
+
+volumes:
+  prometheus:
