@@ -1,0 +1,65 @@
+version: "3.8"
+services:
+  prometheus:
+    build:
+      context: prometheus/
+      args:
+        PROMETHEUS_VERSION: ${PROMETHEUS_VERSION}
+    user: root
+    container_name: prometheus
+    hostname: prometheus
+    restart: always
+    # ports:
+    #   - "9090:9090"
+    networks:
+      - monitoring
+    volumes:
+      - ./prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus:/prometheus/data
+    command:
+      - --web.enable-lifecycle
+      - --web.external-url=prometheus
+      # - "--web.read-timeout=5m"
+      # - "--storage.tsdb.retention=30d"
+      # - "--web.max-connections=512"
+      # - "--query.timeout=2m"
+      # - "--query.max-concurrency=20"
+      # - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+      # - "--web.console.templates=/usr/share/prometheus/consoles"
+      # - '--storage.tsdb.retention.time=7d'
+      - --config.file=/etc/prometheus/prometheus.yml
+  grafana:
+    build:
+      context: grafana/
+      args:
+        GRAFANA_VERSION: ${GRAFANA_VERSION}
+    container_name: grafana
+    hostname: grafana
+    environment:
+      GF_INSTALL_PLUGINS: "grafana-clock-panel,grafana-simple-json-datasource"
+    # ports:
+    #   - "3001:3000"
+    user: "104"
+    volumes:
+      - ./grafana/config/grafana.proxy.ini:/etc/grafana/grafana.ini
+    networks:
+      - monitoring
+  nginx:
+    restart: always
+    container_name: nginx
+    build: ./nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /home/ngxin/www:/var/www
+      - ./nginx/config/nginx.conf:/etc/nginx/nginx.conf
+    networks: 
+      - monitoring
+
+networks:
+  monitoring:
+    driver: bridge
+
+volumes:
+  prometheus:
