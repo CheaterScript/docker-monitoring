@@ -1,0 +1,10 @@
+- targets: ['192.168.225.128:9100']
+  labels:
+    # app:    'app1'
+    # env:   'game1'
+    # region: 'us-west-2'
+# - targets: ['192.168.225.128:9100']
+#   labels:
+    # app:    'app2'
+    # env:   'game2'
+    # region: 'ap-southeast-1'
