@@ -10,6 +10,7 @@ Prerequisites
 
 + docker
 + docker-compose
++ nvidia_docker2
 + nvidia_smi
 
 ### Install monitoring platform
