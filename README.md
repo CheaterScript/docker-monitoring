@@ -106,7 +106,7 @@ The basic version includes Prometheus and Grafana, and run the `Install.ps1` scr
 
 ### Install exporters
 
-Using [node_exporter](https://github.com/prometheus/node_exporter) to monitor host information and using [nvidia_gpu_exporter](https://github.com/utkuozdemir/nvidia_gpu_exporter) to monitor NVIDIA GPU information.
+Using [windows_exporter](https://github.com/prometheus-community/windows_exporter) to monitor host information and using [nvidia_gpu_exporter](https://github.com/utkuozdemir/nvidia_gpu_exporter) to monitor NVIDIA GPU information.
 
 #### Setup
 
