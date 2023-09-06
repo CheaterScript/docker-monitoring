@@ -43,6 +43,7 @@ services:
     restart: always
     volumes:
       - ./grafana/config/grafana.proxy.ini:/etc/grafana/grafana.ini
+      - grafana:/var/lib/grafana
     networks:
       - monitoring
   nginx:
@@ -80,3 +81,4 @@ networks:
 volumes:
   prometheus:
   consul:
+  grafana:
