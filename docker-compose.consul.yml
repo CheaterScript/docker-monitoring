@@ -9,8 +9,8 @@ services:
     container_name: prometheus
     hostname: prometheus
     restart: always
-    # ports:
-    #   - "9090:9090"
+    ports:
+      - "9090:9090"
     networks:
       - monitoring
     volumes:
@@ -37,8 +37,8 @@ services:
     hostname: grafana
     environment:
       GF_INSTALL_PLUGINS: "grafana-clock-panel,grafana-simple-json-datasource"
-    # ports:
-    #   - "3001:3000"
+    ports:
+      - "3000:3000"
     user: "104"
     restart: always
     volumes:
