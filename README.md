@@ -58,13 +58,13 @@ Using [node_exporter](https://github.com/prometheus/node_exporter) to monitor ho
 #### Adding services
 
    ```bash
-    curl -X PUT -d '{"id": "<ID>","name": "<service name>","address": "<IP address>","port": <Port>,"tags": [<tags>],"checks": [{"http": "<protocol>://<IP>:<Port>","interval": "5s"}]}' http://<Consul host>:8500/v1/agent/service/register
+    curl -X PUT -d '{"id": "<ID>","name": "<service name>","address": "<IP address>","port": <Port>,"tags": [<tags>],"checks": [{"http": "<protocol>://<IP>:<Port>","interval": "30s","timeout":"30s"}]}' http://<Consul host>:8500/v1/agent/service/register
    ```
 
 Example:
 
    ```bash
-    curl -X PUT -d '{"id": "Linux-1","name": "Linux","address": "192.168.225.1","port": 9182,"tags": ["service"],"checks": [{"http": "http://192.168.225.1:9182","interval": "5s"}]}' http://192.168.225.128:8500/v1/agent/service/register
+    curl -X PUT -d '{"id": "Linux-1","name": "Linux","address": "192.168.225.1","port": 9182,"tags": ["service"],"checks": [{"http": "http://192.168.225.1:9182","interval": "30s","timeout":"30s"}]}' http://192.168.225.128:8500/v1/agent/service/register
    ```
 
 #### Removing services
@@ -116,3 +116,11 @@ Run the `setup_exporters.bat` file as an administrator.
 #### Stop
 
 Run the `stop_exporters.bat` file as an administrator.
+
+## Dashboards
+
+### Node Exporter 1860
+
+### Nvidia GPU Exporter 14574
+
+### Windows Exporter 19269
