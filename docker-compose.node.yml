@@ -10,7 +10,7 @@ services:
     restart: always
     volumes:
       - '/:/host:ro,rslave'
-  nvidia_gpu_exporter:
+  nvidia_gpu_exporter: 
     image: utkuozdemir/nvidia_gpu_exporter:1.1.0
     container_name: nvidia_gpu_exporter
     deploy:
